@@ -1,0 +1,63 @@
+= CUDA By Example
+
+This repository contains the source code for the examples in the CUDA By Example book. The examples are written by me, only some small parts of the code are copied from the official example in the book.
+
+I used **CUDA 12** on GNU/Linux (Debian 11) to build and run the examples, on a https://www.nvidia.com/en-gb/geforce/graphics-cards/geforce-gtx-1050-ti/specifications/[NVIDIA **GeForce GTX 1050 Ti**] (compute capability 6.1). 
+
+Some useful links I used to study CUDA:
+
+* The official website of the https://developer.nvidia.com/cuda-example[**CUDA By Example**] book, with errata notes.
+* The official https://docs.nvidia.com/cuda/cuda-runtime-api/index.html[**CUDA Runtime API**] reference.
+* The official https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html[**CUDA C++ Programming Guide**] when I didn't understand something in the book, or when I wanted to delve deeper into a topic.
+
+Consultation of the CUDA C++ Programming Guide is required as some topics in the book have been deprecated and removed in CUDA 12 (such as https://stackoverflow.com/a/67197817[texture reference]).
+
+== Project structure
+
+Each directory contains the examples associated with a chapter in the book, plus some additions:
+
+* `03`: examples from the "`Introduction to CUDA C`" chapter.
+* `04`: examples from the "`Parallel Programming in CUDA C`" chapter,
+* `05`: examples from the "`Thread Cooperation`" chapter,
+* `06`: examples from the "`Constant Memory and Events`" chapter,
+* `07`: examples from the "`Texture Memory`" chapter,
+* `09`: examples from the "`Atomics`" chapter,
+* `10`: examples from the "`Streams`" chapter,
+* `11`: examples from the "`Cuda C on Multiple GPUs`" chapter,
+* `A`: examples from the "`Appendix A: Advanced Atomics`" chapter,
+* `common`: common code used in the examples.
+
+Two notes:
+
+1. The `08` directory is missing because the chapter talks about graphics, but I had a GPU on a server so the graphics output was not available.
+2. The `11` directory contains only one example because the chapter talks about multiple GPUs on the same host, but my server had only one GPU.
+
+== Build and run
+
+There is a link:Makefile[global makefile] which has two targets:
+
+1. `all` to build all executables,
+2. `clean` to remove all executables and other generated files.
+
+In each directory there is a Makefile with the `clean` and `all` targets, but also a target for each example. Use this target to build a single example. The makefile of chapter 10 and Appendix A also has support for generating the profile data (`.nvvp` files) for the examples. These files can be opened with https://developer.nvidia.com/nvidia-visual-profiler[**NVIDIA Visual Profiler**] to examine the profile data.
+
+The NVIDIA Visual Profiler is deprecated but the GPU I used is not supported by Nsight Compute, the new visual profiler.
+
+For example, if I want to build the example link:03/device-prop.cu[`03/device-prop.cu`]:
+
+    $ cd 03
+    $ make device-prop
+    nvcc device-prop.cu --output-file device-prop
+    $ ./device-prop
+    --- General Information for device 0 ---
+    Name: NVIDIA GeForce GTX 1050 Ti
+    Compute capability: 6.1
+    [...]
+
+== License
+
+The examples I have written are licensed under the **MIT license**, see the link:LICENSE file for more information. Some parts of the code are derived from the CUDA By Example book, in which case the original license (CUDA EULA) applies.
+
+The link:common/gif.h[^] file is in the public domain from Charlie Tangora. The original repository is https://github.com/charlietangora/gif-h[**charlietangora/gif-h** on GitHub].
+
+The files link:common/lodepng.cpp[^] and link:common/lodepng.h[^] are licensed under the zLib license by Lode Vandevenne. The original repository is https://github.com/lvandeve/lodepng[**lvandeve/lodepng** on GitHub].
