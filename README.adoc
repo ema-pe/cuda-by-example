@@ -12,6 +12,8 @@ Some useful links I used to study CUDA:
 
 Consultation of the CUDA C++ Programming Guide is required as some topics in the book have been deprecated and removed in CUDA 12 (such as https://stackoverflow.com/a/67197817[texture reference]).
 
+The git repository is available online on both link:https://gitlab.com/ema-pe/cuda-by-example[GitLab] and link:https://github.com/ema-pe/cuda-by-example[GitHub]. However, GitHub is a **read-only mirror** of GitLab.
+
 == Project structure
 
 Each directory contains the examples associated with a chapter in the book, plus some additions:
